@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Assessment</string>
+    <string name="tentang_aplikasi">Tentang Aplikasi</string>
+    <string name="copyright">Copyright © 2024 Yudha Hanindyatama.</string>
 </resources>
