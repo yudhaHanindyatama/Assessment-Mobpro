@@ -6,10 +6,12 @@
     <string name="uang">Jumlah Uang</string>
     <string name="dollar">Dollar</string>
     <string name="euro">Euro</string>
-    <string name="pondsterling">Pondsterling</string>
+    <string name="pondsterling">Pound sterling</string>
     <string name="mata_uang">Ke mata uang</string>
     <string name="konversi">Konversi</string>
     <string name="rp">Rp</string>
     <string name="input_invalid">Silahkan isi jumlah uang</string>
-    <string name="hasil">Hasil: %1$.2f %2$s</string>
+    <string name="hasil">Hasil: %1$.3f %2$s</string>
+    <string name="bagikan">Bagikan</string>
+    <string name="bagikan_template">%1$s Rupiah jika dikonversi ke %2$s menjadi %3$.2f %4$s</string>
 </resources>

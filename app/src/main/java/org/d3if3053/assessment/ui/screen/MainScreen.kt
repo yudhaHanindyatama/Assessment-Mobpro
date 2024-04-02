@@ -1,11 +1,11 @@
 package org.d3if3053.assessment.ui.screen
 
+import android.content.Context
+import android.content.Intent
 import android.content.res.Configuration
-import androidx.compose.animation.expandVertically
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -15,7 +15,6 @@ import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.Warning
 import androidx.compose.material3.Button
 import androidx.compose.material3.Divider
-import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExposedDropdownMenuBox
@@ -26,17 +25,17 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
@@ -83,13 +82,13 @@ fun MainScreen(navController: NavHostController) {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ScreenContent(modifier: Modifier) {
-    var uang by remember {
+    var uang by rememberSaveable {
         mutableStateOf("")
     }
-    var uangError by remember {
+    var uangError by rememberSaveable {
         mutableStateOf(false)
     }
-    var expanded by remember {
+    var expanded by rememberSaveable {
         mutableStateOf(false)
     }
     val mataUang = listOf(
@@ -97,18 +96,19 @@ fun ScreenContent(modifier: Modifier) {
         stringResource(id = R.string.euro),
         stringResource(id = R.string.pondsterling)
     )
-    var selectedText by remember {
+    var selectedText by rememberSaveable {
         mutableStateOf(mataUang[0])
     }
-    var hasilMataUang by remember {
+    var hasilMataUang by rememberSaveable {
         mutableStateOf("")
     }
     val conversionRates = mapOf(
-        stringResource(id = R.string.dollar) to 0.00629,
-        stringResource(id = R.string.euro) to 0.00588,
-        stringResource(id = R.string.pondsterling) to 0.00072
+        stringResource(id = R.string.dollar) to 0.0000629,
+        stringResource(id = R.string.euro) to 0.0000588,
+        stringResource(id = R.string.pondsterling) to 0.0000072
     )
-    var hasil by remember { mutableFloatStateOf(0f) }
+    var hasil by rememberSaveable { mutableFloatStateOf(0f) }
+    val context = LocalContext.current
 
     Column (
         modifier = modifier
@@ -186,7 +186,29 @@ fun ScreenContent(modifier: Modifier) {
                 text = stringResource(id = R.string.hasil, hasil, hasilMataUang),
                 style = MaterialTheme.typography.titleLarge
             )
+            Button(
+                onClick = {
+                    shareData(
+                        context = context,
+                        message = context.getString(R.string.bagikan_template, uang, hasilMataUang, hasil, hasilMataUang)
+                    )
+                          },
+                modifier = Modifier.padding(top = 8.dp),
+                contentPadding = PaddingValues(horizontal = 32.dp, vertical = 16.dp)
+            ) {
+                Text(text = stringResource(id = R.string.bagikan))
+            }
         }
+    }
+}
+
+private fun shareData(context: Context, message: String) {
+    val shareIntent = Intent(Intent.ACTION_SEND).apply {
+        type = "text/plain"
+        putExtra(Intent.EXTRA_TEXT, message)
+    }
+    if (shareIntent.resolveActivity(context.packageManager) != null) {
+        context.startActivity(shareIntent)
     }
 }
 
@@ -194,7 +216,6 @@ fun ScreenContent(modifier: Modifier) {
 fun IconPicker(isError: Boolean) {
     if (isError) {
         Icon(imageVector = Icons.Filled.Warning, contentDescription = null)
-    } else {
     }
 }
 
