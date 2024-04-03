@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Konversi Mata Uang</string>
+    <string name="konversi_intro">Aplikasi ini berfungsi untuk mengkonversi rupiah ke mata uang lainnya. Cobalah sekarang!</string>
+    <string name="tentang_aplikasi">Tentang aplikasi</string>
+    <string name="deskripsi">Aplikasi ini dibuat untuk mengkonversi mata uang rupiah ke mata uang lainnya.         Dengan nilai mata uang kurang lebih sebagai berikut:\\n\\n1 Dollar = Rp16.000\\n1 Euro = Rp17.000\\n         1 Poundsterling = Rp20.000\\n\\nMata uang dan negara yang menggunakannya:</string>
+    <string name="copyright">Hak Cipta © 2024 Yudha Hanindyatama.</string>
+    <string name="kembali">Kembali</string>
+    <string name="uang">Jumlah uang</string>
+    <string name="mata_uang">Ke mata uang</string>
+    <string name="konversi">Konversi</string>
+    <string name="input_invalid">Silahkan isi jumlah uang</string>
+    <string name="hasil">Hasil: %1$.3f %2$s</string>
+    <string name="bagikan">Bagikan</string>
+    <string name="bagikan_template">%1$s Rupiah jika dikonversi ke %2$s menjadi %3$.2f %4$s</string>
+</resources>

@@ -9,7 +9,9 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.Warning
@@ -113,10 +115,16 @@ fun ScreenContent(modifier: Modifier) {
     Column (
         modifier = modifier
             .fillMaxSize()
+            .verticalScroll(rememberScrollState())
             .padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(12.dp),
-        horizontalAlignment = Alignment.CenterHorizontally
+        horizontalAlignment = Alignment.CenterHorizontally,
     ) {
+        Text(
+            text = stringResource(id = R.string.konversi_intro),
+            style = MaterialTheme.typography.bodyLarge,
+            modifier = Modifier.fillMaxWidth()
+        )
         OutlinedTextField(
             value = uang,
             onValueChange = { uang = it },
@@ -175,7 +183,10 @@ fun ScreenContent(modifier: Modifier) {
             modifier = Modifier.padding(12.dp),
             contentPadding = PaddingValues(horizontal = 32.dp, vertical = 16.dp)
         ) {
-            Text(text = stringResource(id = R.string.konversi))
+            Text(
+                text = stringResource(id = R.string.konversi),
+                style = MaterialTheme.typography.titleMedium
+            )
         }
         if (hasil != 0f) {
             Divider(
