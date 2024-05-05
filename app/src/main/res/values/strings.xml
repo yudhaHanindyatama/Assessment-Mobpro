@@ -27,4 +27,11 @@
     <string name="grid">grid</string>
     <string name="list">list</string>
     <string name="catatan_keuangan_kosong">Empty financial notes</string>
+    <string name="edit_catatan_keuangan">Edit financial notes</string>
+    <string name="invalid">Invalid</string>
+    <string name="lainnya">Others</string>
+    <string name="hapus_catatan_keuangan">Delete notes</string>
+    <string name="pesan_hapus">Delete this notes?</string>
+    <string name="tombol_hapus">Delete</string>
+    <string name="tombol_batal">Cancel</string>
 </resources>
