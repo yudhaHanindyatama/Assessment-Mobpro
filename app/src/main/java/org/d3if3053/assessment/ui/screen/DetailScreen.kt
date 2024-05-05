@@ -137,6 +137,8 @@ fun DetailScreen(navController: NavHostController, id: Long? = null) {
         }
     ) {padding ->
         FormCatatanKeuangan(
+            selectedText = pilihan,
+            onChooseChange = { pilihan = it },
             description = keterangan,
             ondescriptionChange = { keterangan = it },
             amountOfMoney = jumlahUang,
@@ -149,6 +151,7 @@ fun DetailScreen(navController: NavHostController, id: Long? = null) {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun FormCatatanKeuangan(
+    selectedText: String, onChooseChange: (String) -> Unit,
     description: String, ondescriptionChange: (String) -> Unit,
     amountOfMoney: String, onamountOfMoneyChange: (String) -> Unit,
     modifier: Modifier
@@ -160,9 +163,6 @@ fun FormCatatanKeuangan(
         stringResource(R.string.pemasukan),
         stringResource(R.string.pengeluaran)
     )
-    var selectedText by rememberSaveable {
-        mutableStateOf(pilihan[0])
-    }
 
     Column (
         modifier = modifier
@@ -177,7 +177,7 @@ fun FormCatatanKeuangan(
         ) {
             OutlinedTextField(
                 value = selectedText,
-                onValueChange = {},
+                onValueChange = { },
                 readOnly = true,
                 trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded) },
                 label = { Text(text = stringResource(R.string.pilihan_uang))},
@@ -191,7 +191,7 @@ fun FormCatatanKeuangan(
                     DropdownMenuItem(
                         text = { Text(text = item) },
                         onClick = {
-                            selectedText = item
+                            onChooseChange(item)
                             expanded = false
                         }
                     )
@@ -220,6 +220,7 @@ fun FormCatatanKeuangan(
         )
     }
 }
+
 
 @Composable
 fun DeleteAction(delete: () -> Unit) {
