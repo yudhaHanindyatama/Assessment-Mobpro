@@ -103,7 +103,7 @@ fun DetailScreen(navController: NavHostController, id: Long? = null) {
                 ),
                 actions = {
                     IconButton(onClick = {
-                        if (keterangan == "" || jumlahUang == "") {
+                        if (pilihan == "" || keterangan == "" || jumlahUang == "") {
                             Toast.makeText(context,
                                 context.getString(R.string.invalid), Toast.LENGTH_LONG).show()
                             return@IconButton
@@ -143,34 +143,6 @@ fun DetailScreen(navController: NavHostController, id: Long? = null) {
             onamountOfMoneyChange = { jumlahUang = it },
             modifier = Modifier.padding(padding)
         )
-    }
-}
-
-@Composable
-fun DeleteAction(delete: () -> Unit) {
-    var expanded by remember {
-        mutableStateOf(false)
-    }
-    IconButton(onClick = { expanded = true }) {
-        Icon(
-            imageVector = Icons.Filled.MoreVert,
-            contentDescription = stringResource(R.string.lainnya),
-            tint = MaterialTheme.colorScheme.primary
-        )
-        DropdownMenu(
-            expanded = expanded,
-            onDismissRequest = { expanded = false }
-        ) {
-            DropdownMenuItem(
-                text = {
-                    Text(text = stringResource(R.string.hapus_catatan_keuangan))
-                },
-                onClick = {
-                    expanded = false
-                    delete()
-                }
-            )
-        }
     }
 }
 
@@ -246,6 +218,34 @@ fun FormCatatanKeuangan(
             ),
             modifier = Modifier.fillMaxWidth()
         )
+    }
+}
+
+@Composable
+fun DeleteAction(delete: () -> Unit) {
+    var expanded by remember {
+        mutableStateOf(false)
+    }
+    IconButton(onClick = { expanded = true }) {
+        Icon(
+            imageVector = Icons.Filled.MoreVert,
+            contentDescription = stringResource(R.string.lainnya),
+            tint = MaterialTheme.colorScheme.primary
+        )
+        DropdownMenu(
+            expanded = expanded,
+            onDismissRequest = { expanded = false }
+        ) {
+            DropdownMenuItem(
+                text = {
+                    Text(text = stringResource(R.string.hapus_catatan_keuangan))
+                },
+                onClick = {
+                    expanded = false
+                    delete()
+                }
+            )
+        }
     }
 }
 

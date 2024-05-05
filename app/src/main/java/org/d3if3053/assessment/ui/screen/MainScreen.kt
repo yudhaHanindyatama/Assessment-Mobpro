@@ -16,7 +16,6 @@ import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
 import androidx.compose.foundation.lazy.staggeredgrid.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.Warning
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Divider
@@ -217,20 +216,6 @@ fun GridItem(keuangan: Keuangan, onClick: () -> Unit) {
             overflow = TextOverflow.Ellipsis
         )
         Text(text = keuangan.tanggal)
-    }
-}
-
-@Composable
-fun IconPicker(isError: Boolean) {
-    if (isError) {
-        Icon(imageVector = Icons.Filled.Warning, contentDescription = null)
-    }
-}
-
-@Composable
-fun ErrorHint(isError: Boolean) {
-    if (isError) {
-        Text(text = stringResource(id = R.string.input_invalid))
     }
 }
 
