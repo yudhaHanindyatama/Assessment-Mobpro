@@ -86,7 +86,7 @@ fun DetailScreen(navController: NavHostController, id: Long? = null) {
                     IconButton(onClick = { navController.popBackStack() }) {
                         Icon(
                             imageVector = Icons.Filled.ArrowBack,
-                            contentDescription = stringResource(id = R.string.kembali),
+                            contentDescription = stringResource(R.string.kembali),
                             tint = MaterialTheme.colorScheme.primary
                         )
                     }

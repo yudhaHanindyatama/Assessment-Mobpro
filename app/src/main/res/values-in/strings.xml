@@ -4,7 +4,6 @@
     <string name="konversi_intro">Aplikasi ini berfungsi untuk mengkonversi rupiah ke mata uang lainnya. Cobalah sekarang!</string>
     <string name="deskripsi">Aplikasi ini dibuat untuk mengkonversi mata uang rupiah ke mata uang lainnya.         Dengan nilai mata uang kurang lebih sebagai berikut:\\n\\n1 Dollar = Rp16.000\\n1 Euro = Rp17.000\\n         1 Poundsterling = Rp20.000\\n\\nMata uang dan negara yang menggunakannya:</string>
     <string name="copyright">Hak Cipta © 2024 Yudha Hanindyatama.</string>
-    <string name="kembali">Kembali</string>
     <string name="uang">Jumlah uang</string>
     <string name="mata_uang">Ke mata uang</string>
     <string name="konversi">Konversi</string>
@@ -13,4 +12,20 @@
     <string name="bagikan">Bagikan</string>
     <string name="bagikan_template">%1$s Rupiah jika dikonversi ke %2$s menjadi %3$.2f %4$s</string>
     <string name="tambah_catatan_keuangan">Tambah catatan keuangan</string>
+    <string name="simpan">Simpan</string>
+    <string name="keterangan">Deskripsi</string>
+    <string name="jumlah_uang">Jumlah Uang</string>
+    <string name="pengeluaran">Pengeluaran</string>
+    <string name="pemasukan">Pemasukan</string>
+    <string name="pilihan_uang">Pilihan uang</string>
+    <string name="grid">Tampilan grid</string>
+    <string name="list">Tampilan list</string>
+    <string name="catatan_keuangan_kosong">Catatan keuangan kosong</string>
+    <string name="edit_catatan_keuangan">Edit catatan keuangan</string>
+    <string name="invalid">Invalid</string>
+    <string name="lainnya">Lainnya</string>
+    <string name="hapus_catatan_keuangan">Hapus catatan keuangan</string>
+    <string name="pesan_hapus">Hapus catatan keuangan ini?</string>
+    <string name="tombol_hapus">Hapus</string>
+    <string name="tombol_batal">Batal</string>
 </resources>
