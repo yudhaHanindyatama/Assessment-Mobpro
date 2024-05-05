@@ -13,6 +13,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.Warning
 import androidx.compose.material3.Button
@@ -21,6 +22,7 @@ import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExposedDropdownMenuBox
 import androidx.compose.material3.ExposedDropdownMenuDefaults
+import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -38,6 +40,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
@@ -64,17 +67,36 @@ fun MainScreen(navController: NavHostController) {
                 actions = {
                     IconButton(
                         onClick = {
-                            navController.navigate(Screen.About.route)
+                            navController.navigate(Screen.FormBaru.route)
                         }
                     ) {
                         Icon(
-                            imageVector = Icons.Filled.Info,
-                            contentDescription = stringResource(id = R.string.tentang_aplikasi),
+                            painter = painterResource(
+                                if (showList) R.drawable.baseline_grid_view_24
+                                else R.drawable.baseline_view_list_24
+                            ),
+                            contentDescription = stringResource(
+                                if (showList) R.string.grid
+                                else R.string.list
+                            ),
                             tint = MaterialTheme.colorScheme.primary
                         )
                     }
                 }
             )
+        },
+        floatingActionButton = {
+            FloatingActionButton(
+                onClick = {
+                    navController.navigate(Screen.FormBaru.route)
+                }
+            ) {
+                Icon(
+                    imageVector = Icons.Filled.Add,
+                    contentDescription = stringResource(id = R.string.tambah_catatan_keuangan),
+                    tint = MaterialTheme.colorScheme.primary
+                )
+            }
         }
     ) { padding ->
         ScreenContent(Modifier.padding(padding))
@@ -84,131 +106,15 @@ fun MainScreen(navController: NavHostController) {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ScreenContent(modifier: Modifier) {
-    var uang by rememberSaveable {
-        mutableStateOf("")
-    }
-    var uangError by rememberSaveable {
-        mutableStateOf(false)
-    }
-    var expanded by rememberSaveable {
-        mutableStateOf(false)
-    }
-    val mataUang = listOf(
-        stringResource(id = R.string.dollar),
-        stringResource(id = R.string.euro),
-        stringResource(id = R.string.pondsterling)
-    )
-    var selectedText by rememberSaveable {
-        mutableStateOf(mataUang[0])
-    }
-    var hasilMataUang by rememberSaveable {
-        mutableStateOf("")
-    }
-    val conversionRates = mapOf(
-        stringResource(id = R.string.dollar) to 0.0000629,
-        stringResource(id = R.string.euro) to 0.0000588,
-        stringResource(id = R.string.pondsterling) to 0.0000072
-    )
-    var hasil by rememberSaveable { mutableFloatStateOf(0f) }
-    val context = LocalContext.current
-
-    Column (
-        modifier = modifier
-            .fillMaxSize()
-            .verticalScroll(rememberScrollState())
-            .padding(16.dp),
-        verticalArrangement = Arrangement.spacedBy(12.dp),
-        horizontalAlignment = Alignment.CenterHorizontally,
-    ) {
-        Text(
-            text = stringResource(id = R.string.konversi_intro),
-            style = MaterialTheme.typography.bodyLarge,
-            modifier = Modifier.fillMaxWidth()
-        )
-        OutlinedTextField(
-            value = uang,
-            onValueChange = { uang = it },
-            label = { Text(text = stringResource(id = R.string.uang))},
-            singleLine = true,
-            isError = uangError,
-            trailingIcon = { IconPicker(isError = uangError)},
-            supportingText = { ErrorHint(isError = uangError) },
-            leadingIcon = { Text(text = stringResource(id = R.string.rp))},
-            keyboardOptions = KeyboardOptions(
-                keyboardType = KeyboardType.Number,
-                imeAction = ImeAction.Next
-            ),
-            modifier = Modifier.fillMaxWidth()
-        )
-        ExposedDropdownMenuBox(
-            expanded = expanded,
-            onExpandedChange = { expanded = !expanded }
+    if (data.isEmpty()) {
+        Column (
+            modifier = modifier
+                .fillMaxSize()
+                .padding(16.dp),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            OutlinedTextField(
-                value = selectedText,
-                onValueChange = {},
-                readOnly = true,
-                trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded) },
-                label = { Text(text = stringResource(id = R.string.mata_uang))},
-                modifier = Modifier.menuAnchor()
-            )
-            ExposedDropdownMenu(
-                expanded = expanded,
-                onDismissRequest = { expanded = false}
-            ) {
-                mataUang.forEach { item ->
-                    DropdownMenuItem(
-                        text = { Text(text = item) },
-                        onClick = {
-                            selectedText = item
-                            expanded = false
-                        }
-                    )
-                }
-            }
-        }
-        Button(
-            onClick = {
-                uangError = (uang == "" || uang == "0")
-                if (uangError) return@Button
-
-                val jumlah = uang.toFloatOrNull()
-                val rate = conversionRates[selectedText]
-                if (jumlah != null && rate != null) {
-                    val result = jumlah * rate
-                    hasil = result.toFloat()
-                }
-                hasilMataUang = selectedText
-            },
-            modifier = Modifier.padding(12.dp),
-            contentPadding = PaddingValues(horizontal = 32.dp, vertical = 16.dp)
-        ) {
-            Text(
-                text = stringResource(id = R.string.konversi),
-                style = MaterialTheme.typography.titleMedium
-            )
-        }
-        if (hasil != 0f) {
-            Divider(
-                modifier = Modifier.padding(vertical = 8.dp),
-                thickness = 1.dp
-            )
-            Text(
-                text = stringResource(id = R.string.hasil, hasil, hasilMataUang),
-                style = MaterialTheme.typography.titleLarge
-            )
-            Button(
-                onClick = {
-                    shareData(
-                        context = context,
-                        message = context.getString(R.string.bagikan_template, uang, hasilMataUang, hasil, hasilMataUang)
-                    )
-                          },
-                modifier = Modifier.padding(top = 8.dp),
-                contentPadding = PaddingValues(horizontal = 32.dp, vertical = 16.dp)
-            ) {
-                Text(text = stringResource(id = R.string.bagikan))
-            }
+            Text(text = stringResource(R.string.catatan_keuangan_kosong))
         }
     }
 }

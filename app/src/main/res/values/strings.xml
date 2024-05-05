@@ -1,7 +1,6 @@
 <resources>
-    <string name="app_name">Currency Conversion</string>
+    <string name="app_name">WalleTrack</string>
     <string name="konversi_intro">This app works to convert rupiah to other currencies. Try it now!</string>
-    <string name="tentang_aplikasi">About the App</string>
     <string name="deskripsi">This application is made to convert rupiah currency to other currencies.
         With currency values approximately as follows:\n\n1 Dollar = Rp16,000\n1 Euro = Rp17,000\n
         1 Pound sterling = Rp20,000\n\nCurrency and the country that uses it:</string>
@@ -18,4 +17,14 @@
     <string name="hasil">Result: %1$.3f %2$s</string>
     <string name="bagikan">Share</string>
     <string name="bagikan_template">%1$s Rupiah if converted to %2$s becomes %3$.2f %4$s</string>
+    <string name="tambah_catatan_keuangan">Add financial notes</string>
+    <string name="simpan">Save</string>
+    <string name="keterangan">Description</string>
+    <string name="jumlah_uang">Amount of money</string>
+    <string name="pengeluaran">Expenses</string>
+    <string name="pemasukan">Income</string>
+    <string name="pilihan_uang">Money options</string>
+    <string name="grid">grid</string>
+    <string name="list">list</string>
+    <string name="catatan_keuangan_kosong">Empty financial notes</string>
 </resources>
