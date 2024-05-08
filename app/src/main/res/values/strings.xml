@@ -19,4 +19,5 @@
     <string name="tombol_hapus">Delete</string>
     <string name="tombol_batal">Cancel</string>
     <string name="kembali">Back</string>
+    <string name="dompet_kosong">Empty Wallet</string>
 </resources>

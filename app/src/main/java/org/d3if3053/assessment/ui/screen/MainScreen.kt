@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.staggeredgrid.LazyVerticalStaggeredGrid
@@ -125,6 +126,12 @@ fun ScreenContent(showList: Boolean, modifier: Modifier, navController: NavHostC
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
+            Icon(
+                painter = painterResource(id = R.drawable.baseline_wallet_24),
+                contentDescription = stringResource(R.string.dompet_kosong),
+                tint = MaterialTheme.colorScheme.primary,
+                modifier = Modifier.size(80.dp)
+            )
             Text(text = stringResource(R.string.catatan_keuangan_kosong))
         }
     } else {
@@ -143,11 +150,11 @@ fun ScreenContent(showList: Boolean, modifier: Modifier, navController: NavHostC
             }
         } else {
             LazyVerticalStaggeredGrid(
+                modifier = modifier.fillMaxSize(),
                 columns = StaggeredGridCells.Fixed(2),
                 verticalItemSpacing = 8.dp,
                 horizontalArrangement = Arrangement.spacedBy(8.dp),
-                contentPadding = PaddingValues(8.dp, 8.dp, 8.dp, 84.dp),
-                modifier = modifier.fillMaxSize()
+                contentPadding = PaddingValues(8.dp, 8.dp, 8.dp, 84.dp)
             ) {
                 items(data) {
                     GridItem(keuangan = it) {
@@ -199,23 +206,28 @@ fun GridItem(keuangan: Keuangan, onClick: () -> Unit) {
         ),
         border = BorderStroke(1.dp, Color.Gray)
     ) {
-        Text(
-            text = keuangan.pilihan,
-            maxLines = 1,
-            overflow = TextOverflow.Ellipsis,
-            fontWeight = FontWeight.Bold
-        )
-        Text(
-            text = keuangan.deskripsi,
-            maxLines = 2,
-            overflow = TextOverflow.Ellipsis
-        )
-        Text(
-            text = keuangan.jumlahUang,
-            maxLines = 2,
-            overflow = TextOverflow.Ellipsis
-        )
-        Text(text = keuangan.tanggal)
+        Column (
+            modifier = Modifier.padding(8.dp),
+            verticalArrangement = Arrangement.spacedBy(8.dp),
+        ) {
+            Text(
+                text = keuangan.pilihan,
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis,
+                fontWeight = FontWeight.Bold
+            )
+            Text(
+                text = keuangan.deskripsi,
+                maxLines = 2,
+                overflow = TextOverflow.Ellipsis
+            )
+            Text(
+                text = keuangan.jumlahUang,
+                maxLines = 2,
+                overflow = TextOverflow.Ellipsis
+            )
+            Text(text = keuangan.tanggal)
+        }
     }
 }
 

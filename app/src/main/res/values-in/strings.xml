@@ -29,4 +29,5 @@
     <string name="pesan_hapus">Hapus catatan keuangan ini?</string>
     <string name="tombol_hapus">Hapus</string>
     <string name="tombol_batal">Batal</string>
+    <string name="dompet_kosong">Dompet Kosong</string>
 </resources>
