@@ -6,6 +6,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -23,15 +24,19 @@ import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Switch
+import androidx.compose.material3.SwitchDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -61,6 +66,9 @@ import org.d3if3053.assessment.util.ViewModelFactory
 fun MainScreen(navController: NavHostController) {
     val dataStore = SettingsDataStore(LocalContext.current)
     val showList by dataStore.layoutFlow.collectAsState(true)
+    var checked by rememberSaveable {
+        mutableStateOf(true)
+    }
 
     Scaffold (
         topBar = {
@@ -72,23 +80,38 @@ fun MainScreen(navController: NavHostController) {
                     titleContentColor = MaterialTheme.colorScheme.primary
                 ),
                 actions = {
-                    IconButton(onClick = {
-                        CoroutineScope(Dispatchers.IO).launch {
-                            dataStore.saveLayout(!showList)
+                    Switch(
+                        checked = checked,
+                        onCheckedChange = {
+                            checked = it
+                            CoroutineScope(Dispatchers.IO).launch {
+                                dataStore.saveLayout(it)
+                            }
+                        },
+                        colors = SwitchDefaults.colors(
+                            checkedThumbColor = MaterialTheme.colorScheme.surface,
+                            checkedTrackColor = MaterialTheme.colorScheme.primary,
+                            uncheckedThumbColor = MaterialTheme.colorScheme.surface,
+                            uncheckedTrackColor = MaterialTheme.colorScheme.primary,
+                        ),
+                        modifier = Modifier.padding(end = 8.dp),
+                        thumbContent = {
+                            Row {
+                                Icon(
+                                    painter = painterResource(
+                                        if (showList) R.drawable.baseline_grid_view_24
+                                        else R.drawable.baseline_view_list_24
+                                    ),
+                                    contentDescription = stringResource(
+                                        if (showList) R.string.grid
+                                        else R.string.list
+                                    ),
+                                    tint = MaterialTheme.colorScheme.primary,
+                                    modifier = Modifier.size(SwitchDefaults.IconSize),
+                                )
+                            }
                         }
-                    }) {
-                        Icon(
-                            painter = painterResource(
-                                if (showList) R.drawable.baseline_grid_view_24
-                                else R.drawable.baseline_view_list_24
-                            ),
-                            contentDescription = stringResource(
-                                if (showList) R.string.grid
-                                else R.string.list
-                            ),
-                            tint = MaterialTheme.colorScheme.primary
-                        )
-                    }
+                    )
                 }
             )
         },
