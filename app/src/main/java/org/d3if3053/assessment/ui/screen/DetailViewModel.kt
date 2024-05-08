@@ -30,15 +30,18 @@ class DetailViewModel(private val dao: KeuanganDao) : ViewModel() {
     }
 
     fun update(id: Long, pilihan: String, deskripsi: String, jumlahUang: String) {
-        val keuangan = Keuangan(
-            id = id,
-            tanggal = formatter.format(Date()),
-            pilihan = pilihan,
-            deskripsi = deskripsi,
-            jumlahUang = jumlahUang
-        )
         viewModelScope.launch(Dispatchers.IO) {
-            dao.update(keuangan)
+            val existingKeuangan = dao.getKeuanganById(id)
+            existingKeuangan?.let {
+                val keuangan = Keuangan(
+                    id = id,
+                    tanggal = it.tanggal,
+                    pilihan = pilihan,
+                    deskripsi = deskripsi,
+                    jumlahUang = jumlahUang
+                )
+                dao.update(keuangan)
+            }
         }
     }
 
