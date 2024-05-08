@@ -2,8 +2,10 @@ package org.d3if3053.assessment.ui.screen
 
 import android.content.res.Configuration
 import android.widget.Toast
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -15,12 +17,11 @@ import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.ExposedDropdownMenuBox
-import androidx.compose.material3.ExposedDropdownMenuDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
@@ -148,7 +149,6 @@ fun DetailScreen(navController: NavHostController, id: Long? = null) {
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun FormCatatanKeuangan(
     selectedText: String, onChooseChange: (String) -> Unit,
@@ -156,9 +156,6 @@ fun FormCatatanKeuangan(
     amountOfMoney: String, onamountOfMoneyChange: (String) -> Unit,
     modifier: Modifier
 ) {
-    var expanded by rememberSaveable {
-        mutableStateOf(false)
-    }
     val pilihan = listOf(
         stringResource(R.string.pemasukan),
         stringResource(R.string.pengeluaran)
@@ -171,29 +168,21 @@ fun FormCatatanKeuangan(
         verticalArrangement = Arrangement.spacedBy(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        ExposedDropdownMenuBox(
-            expanded = expanded,
-            onExpandedChange = { expanded = !expanded }
-        ) {
-            OutlinedTextField(
-                value = selectedText,
-                onValueChange = { },
-                readOnly = true,
-                trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded) },
-                label = { Text(text = stringResource(R.string.pilihan_uang))},
-                modifier = Modifier.menuAnchor()
-            )
-            ExposedDropdownMenu(
-                expanded = expanded,
-                onDismissRequest = { expanded = false}
-            ) {
-                pilihan.forEach { item ->
-                    DropdownMenuItem(
-                        text = { Text(text = item) },
-                        onClick = {
-                            onChooseChange(item)
-                            expanded = false
-                        }
+        Column {
+            Text(text = stringResource(id = R.string.pilihan_uang))
+            pilihan.forEach {
+                    text ->
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(2.dp)
+                        .clickable { onChooseChange(text) }
+                ) {
+                    ClassOption(
+                        label = text,
+                        isSelected = selectedText == text,
+                        onSelect = { onChooseChange(text) }
                     )
                 }
             }
@@ -219,6 +208,16 @@ fun FormCatatanKeuangan(
             modifier = Modifier.fillMaxWidth()
         )
     }
+}
+
+@Composable
+fun ClassOption(label: String, isSelected: Boolean, onSelect: () -> Unit) {
+    RadioButton(selected = isSelected, onClick = onSelect)
+    Text(
+        text = label,
+        style = MaterialTheme.typography.bodyLarge,
+        modifier = Modifier
+    )
 }
 
 

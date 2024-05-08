@@ -7,7 +7,7 @@
     <string name="jumlah_uang">Amount of money</string>
     <string name="pengeluaran">Expenses</string>
     <string name="pemasukan">Income</string>
-    <string name="pilihan_uang">Money options</string>
+    <string name="pilihan_uang">Money options:</string>
     <string name="grid">grid</string>
     <string name="list">list</string>
     <string name="catatan_keuangan_kosong">Empty financial notes</string>
