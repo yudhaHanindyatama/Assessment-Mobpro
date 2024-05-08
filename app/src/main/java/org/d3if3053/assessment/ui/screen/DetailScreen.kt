@@ -39,6 +39,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -104,7 +105,8 @@ fun DetailScreen(navController: NavHostController, id: Long? = null) {
                 ),
                 actions = {
                     IconButton(onClick = {
-                        if (pilihan == "" || keterangan == "" || jumlahUang == "") {
+                        val regex = Regex("[0-9]*")
+                        if (pilihan == "" || keterangan == "" || !regex.matches(jumlahUang)) {
                             Toast.makeText(context,
                                 context.getString(R.string.invalid), Toast.LENGTH_LONG).show()
                             return@IconButton
@@ -203,6 +205,7 @@ fun FormCatatanKeuangan(
             onValueChange = { onamountOfMoneyChange(it) },
             label = { Text(text = stringResource(R.string.jumlah_uang)) },
             keyboardOptions = KeyboardOptions(
+                keyboardType = KeyboardType.Number,
                 capitalization = KeyboardCapitalization.Words
             ),
             modifier = Modifier.fillMaxWidth()
