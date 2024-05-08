@@ -16,7 +16,7 @@ interface KeuanganDao {
     @Update
     suspend fun update(keuangan: Keuangan)
 
-    @Query("SELECT * FROM keuangan ORDER BY tanggal ASC")
+    @Query("SELECT * FROM keuangan ORDER BY tanggal DESC")
     fun getKeuangan(): Flow<List<Keuangan>>
     @Query("SELECT * FROM keuangan WHERE id = :id")
     suspend fun getKeuanganById(id: Long): Keuangan?
