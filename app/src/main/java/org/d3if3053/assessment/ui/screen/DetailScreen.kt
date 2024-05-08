@@ -172,20 +172,23 @@ fun FormCatatanKeuangan(
     ) {
         Column {
             Text(text = stringResource(id = R.string.pilihan_uang))
-            pilihan.forEach {
-                    text ->
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(2.dp)
-                        .clickable { onChooseChange(text) }
-                ) {
-                    ClassOption(
-                        label = text,
-                        isSelected = selectedText == text,
-                        onSelect = { onChooseChange(text) }
-                    )
+            Row (
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.spacedBy(70.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                pilihan.forEach {
+                        text ->
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        modifier = Modifier.clickable { onChooseChange(text) }
+                    ) {
+                        ClassOption(
+                            label = text,
+                            isSelected = selectedText == text,
+                            onSelect = { onChooseChange(text) }
+                        )
+                    }
                 }
             }
         }
