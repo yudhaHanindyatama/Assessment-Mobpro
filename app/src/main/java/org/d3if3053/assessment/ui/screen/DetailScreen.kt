@@ -105,8 +105,7 @@ fun DetailScreen(navController: NavHostController, id: Long? = null) {
                 ),
                 actions = {
                     IconButton(onClick = {
-                        val regex = Regex("[0-9]*")
-                        if (pilihan == "" || keterangan == "" || !regex.matches(jumlahUang)) {
+                        if (pilihan == "" || keterangan == "" || jumlahUang == "") {
                             Toast.makeText(context,
                                 context.getString(R.string.invalid), Toast.LENGTH_LONG).show()
                             return@IconButton
@@ -206,10 +205,10 @@ fun FormCatatanKeuangan(
         OutlinedTextField(
             value = amountOfMoney,
             onValueChange = { onamountOfMoneyChange(it) },
+            leadingIcon = { Text(text = stringResource(R.string.rp)) },
             label = { Text(text = stringResource(R.string.jumlah_uang)) },
             keyboardOptions = KeyboardOptions(
-                keyboardType = KeyboardType.Number,
-                capitalization = KeyboardCapitalization.Words
+                keyboardType = KeyboardType.Number
             ),
             modifier = Modifier.fillMaxWidth()
         )
