@@ -5,7 +5,6 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.d3if3053.assessment.database.KeuanganDao
-import org.d3if3053.assessment.model.Keuangan
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale

@@ -12,10 +12,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.staggeredgrid.LazyVerticalStaggeredGrid
 import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
-import androidx.compose.foundation.lazy.staggeredgrid.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.Card
@@ -55,7 +53,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.d3if3053.assessment.R
 import org.d3if3053.assessment.database.KeuanganDb
-import org.d3if3053.assessment.model.Keuangan
 import org.d3if3053.assessment.navigation.Screen
 import org.d3if3053.assessment.ui.theme.AssessmentTheme
 import org.d3if3053.assessment.util.SettingsDataStore

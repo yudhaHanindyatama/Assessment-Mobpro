@@ -6,7 +6,6 @@ import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.stateIn
 import org.d3if3053.assessment.database.KeuanganDao
-import org.d3if3053.assessment.model.Keuangan
 
 class MainViewModel(dao: KeuanganDao) : ViewModel() {
     val data: StateFlow<List<Keuangan>> = dao.getKeuangan().stateIn(
