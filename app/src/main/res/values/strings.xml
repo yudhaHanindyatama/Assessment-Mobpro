@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">WalleTrack</string>
+    <string name="app_name">ArtFolio</string>
     <string name="uang">Amount of Money</string>
     <string name="tambah_catatan_keuangan">Add financial notes</string>
     <string name="simpan">Save</string>
@@ -21,4 +21,6 @@
     <string name="kembali">Back</string>
     <string name="dompet_kosong">Empty Wallet</string>
     <string name="rp">Rp</string>
+    <string name="profil">Profil</string>
+    <string name="tambah_karya_seni">Tambah karya seni</string>
 </resources>
