@@ -23,4 +23,6 @@
     <string name="rp">Rp</string>
     <string name="profil">Profil</string>
     <string name="tambah_karya_seni">Tambah karya seni</string>
+    <string name="tutup">Tutup</string>
+    <string name="logout">Logout</string>
 </resources>
