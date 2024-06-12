@@ -17,7 +17,7 @@
     <string name="hapus_catatan_keuangan">Delete financial notes</string>
     <string name="pesan_hapus">Delete this notes?</string>
     <string name="tombol_hapus">Delete</string>
-    <string name="tombol_batal">Cancel</string>
+    <string name="tombol_batal">Batal</string>
     <string name="kembali">Back</string>
     <string name="dompet_kosong">Empty Wallet</string>
     <string name="rp">Rp</string>
@@ -25,4 +25,13 @@
     <string name="tambah_karya_seni">Tambah karya seni</string>
     <string name="tutup">Tutup</string>
     <string name="logout">Logout</string>
+    <string name="judul">Judul</string>
+    <string name="deskripsi_karya">Deskripsi karya</string>
+    <string name="tahun">Tahun</string>
+    <string name="batal">Batal</string>
+    <string name="error">Error</string>
+    <string name="try_again">Try Again</string>
+    <string name="gambar">Gambar</string>
+    <string name="pesan_hapus_karya">Yakin hapus karya ini?</string>
+    <string name="hapus">Hapus</string>
 </resources>
